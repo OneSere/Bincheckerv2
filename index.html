@@ -2,7 +2,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>readerv2</title>
+  <title>Reader v4</title>
   
 
 </head>
@@ -133,6 +133,14 @@
       margin-top: 0;
     }
 
+    .highlight-box {
+      background-color: rgba(255, 255, 0, 0.2);
+      border: 1px solid rgba(255, 255, 0, 0.5);
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 15px;
+    }
+
     footer {
       text-align: center;
       margin-top: 30px;
@@ -183,6 +191,15 @@
   <p><strong>Balance:</strong> <span id="balance"></span></p>
   <p><strong>Validation Date:</strong> <span id="validation-date"></span></p>
   <p><strong>Holder Name:</strong> <span id="holder-name"></span></p>
+  <div id="amazon-code" class="highlight-box" style="display: none;">
+    <p><strong>Amazon Promo Code:</strong> LP3O-JJRI8L-RHW2</p>
+    <p>The gift card is valid and can be accepted after a while.</p>
+  </div>
+  <div id="flipkart-code" class="highlight-box" style="display: none;">
+    <p><strong>Flipkart Card:</strong> 6000170114828518</p>
+    <p><strong>Pin:</strong> 857032</p>
+    <p>The gift card is valid and can be accepted after a while.</p>
+  </div>
 </div>
 
 <footer>2018 - freekcarders GitHub</footer>
@@ -190,7 +207,6 @@
 <script>
   const amazonButton = document.getElementById('amazon-btn');
   const flipkartButton = document.getElementById('flipkart-btn');
-  const playstoreButton = document.getElementById('playstore-btn');
   const allButtons = document.querySelectorAll('.gift-card-selection button');
 
   const cardNumberInput = document.getElementById('card-number');
@@ -201,6 +217,8 @@
   const balanceSpan = document.getElementById('balance');
   const validationDateSpan = document.getElementById('validation-date');
   const holderNameSpan = document.getElementById('holder-name');
+  const amazonCode = document.getElementById('amazon-code');
+  const flipkartCode = document.getElementById('flipkart-code');
 
   allButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -223,8 +241,12 @@
 
     if (amazonButton.classList.contains('active') && cardNumber === '2049-5532-4800-1212') {
       showResults('₹10,000', '18 Jan 2026', 'Dracik Rose');
+      amazonCode.style.display = 'block';
+      flipkartCode.style.display = 'none';
     } else if (flipkartButton.classList.contains('active') && cardNumber === '3091-7342-0442-3174' && cardPin === '1041') {
       showResults('₹9,950', '19 Jan 2026', 'Dracik Rose');
+      amazonCode.style.display = 'none';
+      flipkartCode.style.display = 'block';
     } else {
       alertInvalid();
     }
@@ -239,6 +261,8 @@
 
   function alertInvalid() {
     resultsContainer.style.display = 'none';
+    amazonCode.style.display = 'none';
+    flipkartCode.style.display = 'none';
     alert('Invalid entry! Please check your card number and PIN.');
   }
 
